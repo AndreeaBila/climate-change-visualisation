@@ -1,4 +1,4 @@
-# Educational Tool for Climate Change Visualisatio n- 2019/2020
+# Educational Tool for Climate Change Visualisation - 2019/2020
 
 **To run this application, you must have Java 8 installed.**
 
@@ -27,4 +27,4 @@ Replacement for the JavaFX ScrollPane, for the added functionality of zooming.Us
 
 #### JUnit 5
 Used for unit testing.\
-*Instructions for how to add the Library to the project are detailed in the [Running the project in IntelliJ IDEA](#Running the project in IntelliJ IDEA) section.
+*Instructions for how to add the Library to the project are detailed in the [Running the project in IntelliJ IDEA](#running-the-project-in-intellij-idea) section.
