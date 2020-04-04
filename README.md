@@ -1,6 +1,6 @@
 # Educational Tool for Climate Change Visualisation - 2019/2020
 
-**To run this application, you must have Java 8 installed.**
+***To run this application, you must have Java 8 installed.**
 
 ### Using the application
 To try and test the application, simply open a terminal in the `climate-change-vis` folder and run the command `java -jar climate-change-vis-app.jar`
