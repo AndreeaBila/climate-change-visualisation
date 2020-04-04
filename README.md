@@ -1,4 +1,3 @@
-# Final Year Project
 ## Educational Tool for Climate Change Visualisatio n- 2019/2020
 
 **To run this application, you must have Java 8 installed.**
