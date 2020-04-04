@@ -9,7 +9,7 @@ and run the command `java -jar climate-change-vis-app.jar`
 To access the code and run it yourself in IntelliJ IDEA, click `Create A New Project` 
 on the home screen, or go to `File > New > Project`. From the menu on the left side, 
 select **JavaFX** and click Next. Click on `Project Location` and from the File Explorer
-select the `climate-change-visualisation` Folder and Press Finish. Remove the `Sample` Folder that IntelliJ
+select the `climate-change-visualisation` Folder and press Finish. Remove the `Sample` Folder that IntelliJ
 created. Mark `src` as the Source Root Folder, `resources` as the Resource Root Folder and
 `test` as the Test Root Folder. Add JUnit 5 as a Project Library.
 In `File > Project Structure > Project` ensure the `Project SDK` is set to 1.8 and `Project 
