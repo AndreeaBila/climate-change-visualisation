@@ -1,0 +1,85 @@
+.messageTextArea {
+    -fx-padding: 0px 5px;
+    -fx-font-size: 18;
+    -fx-font-weight: 500;
+    -fx-font-family: "Consolas";
+}
+
+.text-area {
+    -fx-background-color: #111 ;
+    -fx-text-fill: #ddd;
+    -fx-border-color: #111;
+}
+
+.menuButton {
+    /*-fx-pref-width: 200;*/
+    -fx-alignment: top-center;
+    -fx-padding: 7px;
+    -fx-background-color: #444;
+    -fx-text-fill: #eee;
+    /*-fx-pref-height: 35px;*/
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 12, 0,0,0);
+}
+
+.menuBox {
+    -fx-spacing: 20;
+    -fx-alignment: top-center;
+    -fx-background-color: transparent;
+    -fx-text-fill: #ddd;
+}
+
+
+
+.label {
+    -fx-text-fill: #bbb;
+    -fx-font-size: 15;
+    -fx-font-weight: bold;
+}
+
+.slider .track {
+    -fx-background-color: linear-gradient(to right, #969696, #2D819D);
+}
+
+.slider .axis { -fx-tick-label-fill: #777; }
+
+
+.scroll-pane {
+    -fx-background-color: #222;
+}
+
+.scroll-bar {
+    -fx-background-color: rgba(0,0,0,0.2);
+    /*-fx-pref-width: 14px;*/
+}
+
+.scroll-bar .thumb{
+    -fx-background-color: #333;
+}
+
+.scroll-pane .viewport,.text-area .content, .text-area .scroll-pane, .finalMenu{
+    -fx-background-color: transparent;
+}
+
+.bottomButton {
+    -fx-background-insets: 0px 0px 20px 0px;
+    -fx-border-insets: 0px 0px 20px 0px;
+    -fx-padding: 7px 7px 27px 7px;
+}
+
+.dismissButton {
+    -fx-background-color: transparent;
+    -fx-text-fill: #fff;
+    -fx-font-size: 18pt;
+    -fx-font-weight: 500;
+}
+
+.infoDialog {
+    -fx-font-family: "Consolas";
+    -fx-text-fill: #eee;
+    -fx-font-size: 14pt;
+    -fx-font-weight: 400!important;
+    -fx-padding: 25px 15px 25px 30px;
+    -fx-background-radius: 4;
+    -fx-background-color: rgba(20,20,20,0.90);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 12, 0,0,0);
+}
