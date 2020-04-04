@@ -1,27 +1,33 @@
 # Final Year Project
-## Educational Tool for Climate Change Visualisation
-### 2019/2020
+## Educational Tool for Climate Change Visualisatio n- 2019/2020
 
-#### Using the application
-To test the application, simply open a terminal in the aib743 folder 
-and run the command `java -jar climate-change-vis-app.jar`
+**To run this application, you must have Java 8 installed.**
 
-#### Running the project in IntelliJ IDEA
-To access the code and run it yourself in IntelliJ IDEA, click `Create A New Project` 
-on the home screen, or go to `File > New > Project`. From the menu on the left side, 
-select **JavaFX** and click Next. Click on `Project Location` and from the File Explorer
-select the `aib743` Folder and Press Finish. Remove the `Sample` Folder that IntelliJ
-created. Mark `src` as the Source Root Folder, `resources` as the Resource Root Folder and
-`test` as the Test Root Folder. Add JUnit 5 as a Project Library.
-In `File > Project Structure > Project` ensure the `Project SDK` is set to 1.8 and `Project 
-Language Level` is set to 8. Finally, go to `aib743 > src > aib > Main` and run the `main()` 
-method.
+### Using the application
+To try and test the application, simply open a terminal in the `climate-change-vis` folder and run the command `java -jar climate-change-vis-app.jar`
 
-#### Libraries
-##### FastNoise by Jordan Peck
-Library used to generate noise values from my samples. I replaced javax.vecmath.Vector2f 
-and javax.vecmath.Vector3f with com.sun.javafx.geom.Vec2f and com.sun.javafx.geom.Vec3f
-because javax is no longer part of java and I already use JavaFX.
-##### ZoomableScrollPane by
-Replacement for the JavaFX ScrollPane, for the added functionality of zooming.
-Used as a container for the map, so it can be zoomed in on.
+### Running the project in IntelliJ IDEA
+
+To access the code and run it yourself in IntelliJ IDEA, take the following steps:
+- Right click the climate-change-vis folder and click **Open Folder as IntelliJ IDEA Project**. Alternatively, with IntelliJ IDEA open, click `File > New > Project From existing Sources` and select the `climate-change-vis` folder. Leave all the other settings as they are to create the project.
+- After the project is created, go to `File > Project Structure > Project` and set the **Project SDK** to **1.8**
+- Set the **Project language level** to **8 - Lambdas, type annotations etc.**. 
+- Set the Project complier output to a new folder `climate-change-vis > out`.
+- Add JUnit as a Project Library. Still inside the **Project Structure** menu, navigate to **Libraries** and click **+** and select **From Maven**. In the dialog that appears, write "org.junit.jupiter:junit-jupiter:5.4.2" in the search bar and press **OK**. Apply the changes and close the Project Structure menu 
+- From the project file list, right click the `src` folder and press `Mark Directory as > Source Root`. Mark `resources` as the `Resource Root` folder and `test` as the `Test Root` folder the same way.
+- Finally, run the main method by opening the `climate-change-vis > src > aib > Main` file and then clicking `Run > Run... > Main > Run` from the application bar.
+
+### Libraries
+----
+#### [FastNoise by Jordan Peck](https://github.com/Auburns/FastNoise_Java)
+Library used to generate noise values from my samples. I replaced javax.vecmath.Vector2f and javax.vecmath.Vector3f with com.sun.javafx.geom.Vec2f and com.sun.javafx.geom.Vec3f because javax is no longer part of Java and I already use JavaFX.
+
+*The class is included in my project structure, so you do not need to add it in.
+
+#### [ZoomableScrollPane by Daniel Hári](https://stackoverflow.com/a/44314455)
+Replacement for the JavaFX ScrollPane, for the added functionality of zooming.Used as a container for the map, so it can be zoomed in on. 
+
+*The class is included in my project structure, so you do not need to add it in.
+
+#### JUnit 5
+Used for unit testing.
