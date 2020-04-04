@@ -1,5 +1,4 @@
-# Final Year Project
-## Educational Tool for Climate Change Visualisation
+# Educational Tool for Climate Change Visualisation
 ### 2019/2020
 
 #### Using the application
