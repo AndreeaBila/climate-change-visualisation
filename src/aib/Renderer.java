@@ -66,7 +66,10 @@ public class Renderer {
                 }
 
                 // Draw the equator line halfway on the map
-                if(y == Constants.MAP_SIZE_Y/2) colour = Color.BLACK;
+                if(Main.mainMenu.showEquatorLineCheck.isSelected())
+                    if(y >= (Constants.MAP_SIZE_Y/2)-1 && y <= (Constants.MAP_SIZE_Y/2))
+                        colour = Color.BLACK;
+
                 pixelWriter.setColor(x, y, colour);
             }
         }

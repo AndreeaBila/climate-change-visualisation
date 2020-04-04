@@ -3,18 +3,18 @@
 ***To run this application, you must have Java 8 installed.**
 
 ### Using the application
-To try and test the application, simply open a terminal in the `climate-change-vis` folder and run the command `java -jar climate-change-vis-app.jar`
+To try and test the application, simply open a terminal in the `climate-change-visualisation` folder and run the command `java -jar app.jar`, or double click `app.jar` from the file explorer.
 
 ### Running the project in IntelliJ IDEA
 
 To access the code and run it yourself in IntelliJ IDEA, take the following steps:
-- Right click the climate-change-vis folder and click **Open Folder as IntelliJ IDEA Project**. Alternatively, with IntelliJ IDEA open, click `File > New > Project From existing Sources` and select the `climate-change-vis` folder. Leave all the other settings as they are to create the project.
+- Right click the root folder `climate-change-visualisation` and click **Open Folder as IntelliJ IDEA Project**. Alternatively, with IntelliJ IDEA open, click `File > New > Project From existing Sources` and select the `climate-change-visualisation` folder. Leave all the other settings as they are to create the project.
 - After the project is created, go to `File > Project Structure > Project` and set the **Project SDK** to **1.8**
 - Set the **Project language level** to **8 - Lambdas, type annotations etc.**
-- Set the **Project complier output** to a new folder `climate-change-vis > out`.
+- Create a new directory `out` inside the root folder `climate-change-visualisation`. From `File > Project Structure > Project`, set this folder as the **Project compiler output** by typing or selecting its path.
 - Add JUnit as a Project Library. Still inside the **Project Structure** menu, navigate to **Libraries** and click **+** and select **From Maven**. In the dialog that appears, write *"org.junit.jupiter:junit-jupiter:5.4.2"* in the search bar and press **OK**. Apply the changes and close the Project Structure menu 
 - From the project file list, right click the `src` folder and press `Mark Directory as > Source Root`. Mark `resources` as the `Resource Root` folder and `test` as the `Test Root` folder the same way.
-- Finally, run the main method by opening the `climate-change-vis > src > aib > Main` file and then clicking `Run > Run... > Main > Run` from the application bar.
+- Finally, run the main method by opening the `climate-change-visualisation > src > aib > Main` file and then clicking `Run > Run... > Main > Run` from the application bar.
 
 ## Libraries
 #### [FastNoise by Jordan Peck](https://github.com/Auburns/FastNoise_Java)

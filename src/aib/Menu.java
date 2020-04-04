@@ -27,8 +27,7 @@ import java.util.Random;
  */
 public class Menu {
     /** Generic slider width */
-    public final int SLIDER_WIDTH = 390;
-    public final int SLIDER_MIN_WIDTH = 185;
+    public final int SLIDER_WIDTH = 380;
     /** Menu container */
     public VBox menu;
     /** Message box where information is displayed to the user */
@@ -47,6 +46,10 @@ public class Menu {
     public boolean showAnimals;
     /** Checkbox to select if animals are shown or hidden */
     public CheckBox showAnimalsCheck;
+    /** Boolean to determine if the equator line show be displayed or hidden **/
+    public boolean showEquatorLine;
+    /** CheckBox to show or hide the equator line **/
+    public CheckBox showEquatorLineCheck;
 
     /** Map containers -> ZoomableScrollPane to zoom and scroll */
     public ZoomableScrollPane mapZoomablePane;
@@ -111,6 +114,7 @@ public class Menu {
         randomSeed = new Button("Random");
         generateAnimals = new Button("Generate Animals");
         showAnimalsCheck = new CheckBox();
+        showEquatorLineCheck = new CheckBox();
         initSliders();
         noiseTypeComboBox = new ComboBox<FastNoise.NoiseType>();
 
@@ -135,7 +139,7 @@ public class Menu {
         scaleValue = new Label(Double.toString(scaleSlider.getValue()));
         offsetXSlider = new Slider(-5000, 5000, 0);
         offsetXValue = new Label("" + (int) offsetXSlider.getValue());
-        offsetYSlider = new Slider(-1000, 1000, 0);
+        offsetYSlider = new Slider(-5000, 5000, 0);
         offsetYValue = new Label("" + (int) offsetYSlider.getValue());
     }
 
@@ -377,6 +381,19 @@ public class Menu {
         mapSettingsGrid.setPrefWidth(600);
         mapSettingsGrid.setMinWidth(400);
 
+        // Show equator line checkbox
+        showEquatorLineCheck.setSelected(true);
+        showEquatorLine = autoUpdateCheck.isSelected();
+        showEquatorLineCheck.setText("Show equator line");
+        showEquatorLineCheck.setTextFill(Color.WHITE);
+        showEquatorLineCheck.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            showEquatorLine = newValue;
+            drawMap();
+        });
+        GridPane.setConstraints(showEquatorLineCheck, 1, 1);
+        GridPane.setColumnSpan(showEquatorLineCheck, 3);
+        mapSettingsGrid.getChildren().add(showEquatorLineCheck);
+
         // Noise type combo list
         Label noiseTypeLabel = new Label("Noise Type:");
         ObservableList<FastNoise.NoiseType> noiseTypes = FXCollections.observableArrayList(
@@ -386,9 +403,9 @@ public class Menu {
         noiseTypeComboBox.getItems().addAll(noiseTypes);
         noiseTypeComboBox.setValue(FastNoise.NoiseType.Perlin);
         noiseTypeComboBox.setPrefWidth(SLIDER_WIDTH);
-        GridPane.setConstraints(noiseTypeLabel, 0, 1);
+        GridPane.setConstraints(noiseTypeLabel, 0, 2);
         mapSettingsGrid.getChildren().add(noiseTypeLabel);
-        GridPane.setConstraints(noiseTypeComboBox, 1, 1);
+        GridPane.setConstraints(noiseTypeComboBox, 1, 2);
         mapSettingsGrid.getChildren().add(noiseTypeComboBox);
 
         // Noise scale slider
@@ -399,12 +416,40 @@ public class Menu {
         scaleSlider.setMajorTickUnit(5);
         scaleSlider.setMinorTickCount(4);
         scaleSlider.setPrefWidth(SLIDER_WIDTH);
-        GridPane.setConstraints(scaleLabel, 0, 2);
+        GridPane.setConstraints(scaleLabel, 0, 3);
         mapSettingsGrid.getChildren().add(scaleLabel);
-        GridPane.setConstraints(scaleSlider, 1, 2);
+        GridPane.setConstraints(scaleSlider, 1, 3);
         mapSettingsGrid.getChildren().add(scaleSlider);
-        GridPane.setConstraints(scaleValue, 2, 2);
+        GridPane.setConstraints(scaleValue, 2, 3);
         mapSettingsGrid.getChildren().add(scaleValue);
+
+        // Noise offset x slider
+        Label offsetXLabel = new Label("Offset X: ");
+        offsetXSlider.setBlockIncrement(1f);
+        offsetXSlider.setShowTickMarks(true);
+        offsetXSlider.setShowTickLabels(true);
+        offsetXSlider.setMajorTickUnit(1000);
+        offsetXSlider.setMinorTickCount(500);
+        GridPane.setConstraints(offsetXLabel, 0, 4);
+        mapSettingsGrid.getChildren().add(offsetXLabel);
+        GridPane.setConstraints(offsetXSlider, 1, 4);
+        mapSettingsGrid.getChildren().add(offsetXSlider);
+        GridPane.setConstraints(offsetXValue, 2, 4);
+        mapSettingsGrid.getChildren().add(offsetXValue);
+
+        // Noise offset y slider
+        Label offsetYLabel = new Label("Offset Y: ");
+        offsetYSlider.setBlockIncrement(1f);
+        offsetYSlider.setShowTickMarks(true);
+        offsetYSlider.setShowTickLabels(true);
+        offsetYSlider.setMajorTickUnit(2500);
+        offsetYSlider.setMinorTickCount(500);
+        GridPane.setConstraints(offsetYLabel, 0, 5);
+        mapSettingsGrid.getChildren().add(offsetYLabel);
+        GridPane.setConstraints(offsetYSlider, 1, 5);
+        mapSettingsGrid.getChildren().add(offsetYSlider);
+        GridPane.setConstraints(offsetYValue, 2, 5);
+        mapSettingsGrid.getChildren().add(offsetYValue);
 
         // Noise octaves slider
         Label octavesLabel = new Label("Octaves: ");
@@ -414,11 +459,11 @@ public class Menu {
         octavesSlider.setMajorTickUnit(1);
         octavesSlider.setMinorTickCount(0);
         octavesSlider.setSnapToTicks(true);
-        GridPane.setConstraints(octavesLabel, 0, 3);
+        GridPane.setConstraints(octavesLabel, 0, 6);
         mapSettingsGrid.getChildren().add(octavesLabel);
-        GridPane.setConstraints(octavesSlider, 1, 3);
+        GridPane.setConstraints(octavesSlider, 1, 6);
         mapSettingsGrid.getChildren().add(octavesSlider);
-        GridPane.setConstraints(octavesValue, 2, 3);
+        GridPane.setConstraints(octavesValue, 2, 6);
         mapSettingsGrid.getChildren().add(octavesValue);
 
         // Noise lacunarity slider
@@ -427,11 +472,11 @@ public class Menu {
         lacunaritySlider.setShowTickLabels(true);
         lacunaritySlider.setMajorTickUnit(.5);
         lacunaritySlider.setMinorTickCount(4);
-        GridPane.setConstraints(lacunarityLabel, 0, 4);
+        GridPane.setConstraints(lacunarityLabel, 0, 7);
         mapSettingsGrid.getChildren().add(lacunarityLabel);
-        GridPane.setConstraints(lacunaritySlider, 1, 4);
+        GridPane.setConstraints(lacunaritySlider, 1, 7);
         mapSettingsGrid.getChildren().add(lacunaritySlider);
-        GridPane.setConstraints(lacunarityValue, 2, 4);
+        GridPane.setConstraints(lacunarityValue, 2, 7);
         mapSettingsGrid.getChildren().add(lacunarityValue);
 
         // Noise persistence slider
@@ -440,40 +485,12 @@ public class Menu {
         persistenceSlider.setShowTickLabels(true);
         persistenceSlider.setMajorTickUnit(.1);
         persistenceSlider.setMinorTickCount(4);
-        GridPane.setConstraints(persistenceLabel, 0, 5);
+        GridPane.setConstraints(persistenceLabel, 0, 8);
         mapSettingsGrid.getChildren().add(persistenceLabel);
-        GridPane.setConstraints(persistenceSlider, 1, 5);
+        GridPane.setConstraints(persistenceSlider, 1, 8);
         mapSettingsGrid.getChildren().add(persistenceSlider);
-        GridPane.setConstraints(persistenceValue, 2, 5);
+        GridPane.setConstraints(persistenceValue, 2, 8);
         mapSettingsGrid.getChildren().add(persistenceValue);
-
-        // Noise offset x slider
-        Label offsetXLabel = new Label("Offset X: ");
-        offsetXSlider.setBlockIncrement(1f);
-        offsetXSlider.setShowTickMarks(true);
-        offsetXSlider.setShowTickLabels(true);
-        offsetXSlider.setMajorTickUnit(100);
-        offsetXSlider.setMinorTickCount(1);
-        GridPane.setConstraints(offsetXLabel, 0, 6);
-        mapSettingsGrid.getChildren().add(offsetXLabel);
-        GridPane.setConstraints(offsetXSlider, 1, 6);
-        mapSettingsGrid.getChildren().add(offsetXSlider);
-        GridPane.setConstraints(offsetXValue, 2, 6);
-        mapSettingsGrid.getChildren().add(offsetXValue);
-
-        // Noise offset y slider
-        Label offsetYLabel = new Label("Offset Y: ");
-        offsetYSlider.setBlockIncrement(1f);
-        offsetYSlider.setShowTickMarks(true);
-        offsetYSlider.setShowTickLabels(true);
-        offsetYSlider.setMajorTickUnit(100);
-        offsetYSlider.setMinorTickCount(1);
-        GridPane.setConstraints(offsetYLabel, 0, 7);
-        mapSettingsGrid.getChildren().add(offsetYLabel);
-        GridPane.setConstraints(offsetYSlider, 1, 7);
-        mapSettingsGrid.getChildren().add(offsetYSlider);
-        GridPane.setConstraints(offsetYValue, 2, 7);
-        mapSettingsGrid.getChildren().add(offsetYValue);
 
         // Add on change event handlers for all menu settings, so they can auto update
         addHandlers();
@@ -481,7 +498,7 @@ public class Menu {
         // Button that forces the map to regenerate
         // Useful when auto update is off
         // or when you want to remove animals and start fresh but with the same settings as before
-        Button generate = new Button("Generate");
+        Button generate = new Button("Generate Map (clean)");
         generate.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> createMap());
 
         // Button to toggle the map settings part of the menu
@@ -500,25 +517,25 @@ public class Menu {
         generate.getStyleClass().add("menuButton");
         mapSettingsCollapse.getStyleClass().add("menuButton");
         generate.setPrefWidth(SLIDER_WIDTH);
-        generate.setMinWidth(SLIDER_MIN_WIDTH);
         generate.getStyleClass().add("bottomButton");
         mapSettingsCollapse.setPrefWidth(SLIDER_WIDTH);
-        mapSettingsCollapse.setMinWidth(SLIDER_MIN_WIDTH);
 
         // Add all menu elements to the menu container
         menu.getChildren().addAll(importantGrid, mapSettingsCollapse, generate);
         menu.getStyleClass().add("menuBox");
         menu.prefWidth(600);
-        menu.prefHeight(505);
+        menu.prefHeight(600);
         menu.setMinWidth(600);
 
         // Make the menu scrollable
         ScrollPane menuScrollPane = new ScrollPane(menu);
-        menuScrollPane.setPrefSize(620, 508);
+        menuScrollPane.setPrefSize(620, 558);
+        menuScrollPane.setMinWidth(620);
 
         // Additional menu styling
         messageText.getStyleClass().add("messageTextArea");
-        messageText.setPrefSize(620, 505);
+        messageText.setPrefSize(620, 555);
+        messageText.autosize();
         messageText.setMinWidth(620);
 
         // Left side of the application, with the menu and the information box
