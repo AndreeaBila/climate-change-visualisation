@@ -28,7 +28,7 @@ public class Life {
 
         List<Animal> animals = new ArrayList<>();
         // Use the same seed as for the map to generate the same animals every time for this map
-        Random rand = new Random(Integer.parseInt(Main.mainMenu.seedField.getText()));
+        Random rand = new Random(Integer.parseInt(Main.userInterface.seedField.getText()));
 
         // For each pixel, find and spawn animals based on probabilities
         for (int x = 0; x < World.pixels.length - 40; x++) {
@@ -71,7 +71,7 @@ public class Life {
 
         // Add the animals to the world
         World.setAnimals(animals);
-        Main.mainMenu.printToUserTextBox(World.getAnimals().size() + " animals generated");
+        Main.userInterface.printToUserTextBox(World.getAnimals().size() + " animals generated");
     }
 
     /**

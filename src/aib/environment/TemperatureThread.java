@@ -29,14 +29,14 @@ public class TemperatureThread implements Runnable {
     @Override
     public void run() {
         // On the javafx application thread, display the loading animation
-        Platform.runLater( () -> Main.mainMenu.startLoading());
+        Platform.runLater( () -> Main.userInterface.startLoading());
         // On this thread, do the temperature calculations and change the world
         World.updateMapCalculation(decades, increase);
         // Once the calculations are done, back on the javafx app thread stop displaying the loading animation
         Platform.runLater( () -> {
-            World.prevYear = Main.mainMenu.timelineSlider.getValue();
-            Main.mainMenu.stopLoading();
-            Main.mainMenu.showDialog(Main.mainMenu.dialogText);
+            World.prevYear = Main.userInterface.timelineSlider.getValue();
+            Main.userInterface.stopLoading();
+            Main.userInterface.showDialog(Main.userInterface.dialogText);
         });
     }
 

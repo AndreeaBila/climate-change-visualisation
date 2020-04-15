@@ -33,7 +33,7 @@ public class Noise {
 
         // Use library to generate the noise sample
         FastNoise myNoise = new FastNoise();
-        myNoise.SetNoiseType(Main.mainMenu.noiseTypeComboBox.getValue());
+        myNoise.SetNoiseType(Main.userInterface.noiseTypeComboBox.getValue());
 
         // Octaves offsets
         Random rand = new Random(seed);
@@ -202,6 +202,6 @@ public class Noise {
      * @return The normalised value
      */
     public static float inverseLerp(float min, float max, float x) {
-        return (x - min) / (max - min);
+         return (x - min) / (max - min);
     }
 }

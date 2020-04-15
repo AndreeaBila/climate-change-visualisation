@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     /** The application menu */
-    public static Menu mainMenu;
+    public static UserInterface userInterface;
 
     /**
      * The start method that sets and displays the application window
@@ -22,8 +22,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         // Create new menu
-        mainMenu = new Menu();
-        HBox root = mainMenu.buildWindow();
+        userInterface = new UserInterface();
+        HBox root = userInterface.buildWindow();
 
         // Application bar title
         primaryStage.setTitle("Climate Change Visualisation");

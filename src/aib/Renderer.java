@@ -1,5 +1,6 @@
 package aib;
 
+import aib.environment.TerrainSections;
 import aib.environment.World;
 import aib.life.Animal;
 import javafx.scene.Group;
@@ -66,7 +67,7 @@ public class Renderer {
                 }
 
                 // Draw the equator line halfway on the map
-                if(Main.mainMenu.showEquatorLineCheck.isSelected())
+                if(Main.userInterface.showEquatorLineCheck.isSelected())
                     if(y >= (Constants.MAP_SIZE_Y/2)-1 && y <= (Constants.MAP_SIZE_Y/2))
                         colour = Color.BLACK;
 
@@ -158,11 +159,26 @@ public class Renderer {
             if(!animal.isAlive())
                 iv.setEffect(greyscale);
 
-            Main.mainMenu.map.getChildren().add(iv);
+            // Add the image on top of the map
+            Main.userInterface.map.getChildren().add(iv);
 
             // When the animal is clicked, informed the user of its state
-            iv.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> Main.mainMenu.printToUserTextBox(
-                            "This " + animal.getName() + " is " + ((animal.isAlive()) ? "alive" : "dead")));
+            iv.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                // Create a string of all the compatible habitats
+                String habitats = "";
+                for(int id: animal.getCompatibleTerrainsIDs()) {
+                    habitats += TerrainSections.getTerrainByID(id).getName() + ", ";
+                }
+                habitats = habitats.substring(0, habitats.length()-2);
+
+                Main.userInterface.printToUserTextBox("--------------------------------------------------------");
+                Main.userInterface.printToUserTextBox("Species: " + animal.getName());
+                Main.userInterface.printToUserTextBox("Animal center coordinates: x: " + animal.getX() + " y: " + animal.getY());
+                Main.userInterface.printToUserTextBox("Habitats: " + habitats);
+                Main.userInterface.printToUserTextBox("Current terrain: " + World.pixels[animal.getX()][animal.getY()].getTerrainType().getName());
+                Main.userInterface.printToUserTextBox("State: " + ((animal.isAlive()) ? "alive" : "dead"));
+
+            });
         }
     }
 }

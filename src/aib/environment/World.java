@@ -4,12 +4,11 @@ import aib.Constants;
 import aib.Main;
 import aib.Renderer;
 import aib.life.Animal;
-import com.sun.javafx.geom.Vec2f;
 import javafx.scene.paint.Color;
 
 import java.util.*;
 
-import static aib.Main.mainMenu;
+import static aib.Main.userInterface;
 
 /**
  * The static World class handles
@@ -101,7 +100,7 @@ public class World {
                 seed,scale,octaves,persistence,lacunarity,offsetX,offsetY);
 
         // Create a second layer of Perlin noise, for the initial greenhouse gas levels
-        Random r = new Random(Integer.parseInt(Main.mainMenu.seedField.getText()));
+        Random r = new Random(Integer.parseInt(Main.userInterface.seedField.getText()));
         float[][] greenhouseMap = Noise.generateNoiseMap(Constants.MAP_SIZE_X, Constants.MAP_SIZE_Y,
                 r.nextInt(),2.5f,5,0.4f,2.7f,0,0);
 
@@ -132,10 +131,10 @@ public class World {
         averageWorldTemperature = totalMapTemperature / (pixels.length * pixels[0].length);
         initialAverageTemperature = averageWorldTemperature;
         // Display the temperature to the user
-        Main.mainMenu.printToUserTextBox("Average world temperature: " + String.format("%.2f",averageWorldTemperature) + "\u00B0" + "C");
+        Main.userInterface.printToUserTextBox("Average world temperature: " + String.format("%.2f",averageWorldTemperature) + "\u00B0" + "C");
         // Display the percentage of water and ice on the map to the user
-        Main.mainMenu.printToUserTextBox("Water percentage: " +  String.format("%.2f",(waterPixels *100.0f)/(Constants.MAP_SIZE_Y * Constants.MAP_SIZE_X)) + "%");
-        Main.mainMenu.printToUserTextBox("Ice percentage: " +  String.format("%.2f",(icePixels *100.0f)/(Constants.MAP_SIZE_Y * Constants.MAP_SIZE_X)) + "%");
+        Main.userInterface.printToUserTextBox("Water percentage: " +  String.format("%.2f",(waterPixels *100.0f)/(Constants.MAP_SIZE_Y * Constants.MAP_SIZE_X)) + "%");
+        Main.userInterface.printToUserTextBox("Ice percentage: " +  String.format("%.2f",(icePixels *100.0f)/(Constants.MAP_SIZE_Y * Constants.MAP_SIZE_X)) + "%");
     }
 
     /**
@@ -147,9 +146,9 @@ public class World {
         // Get the pixel at these coordinates
         Pixel pixel = pixels[x][y];
         // Calculate the pixel latitude
-        int latitude = (y - Constants.MAP_SIZE_Y/2);
+        int latitude = -(y - Constants.MAP_SIZE_Y/2);
         // Set the point latitude
-        pixel.setLatitude(latitude/5.0f);
+        pixel.setLatitude(latitude/(Constants.MAP_SIZE_Y/2/90f));
 
         // First step of temperature calculation:
         // Calculate sea level (0 meters above water) temperature
@@ -434,16 +433,16 @@ public class World {
         else tempChange = initialAverageTemperature - averageWorldTemperature;
 
         // Add update to dialog text
-        mainMenu.dialogText += "New average world temperature: " + String.format("%.2f",averageWorldTemperature) + "\u00B0" + "C\n";
+        userInterface.dialogText += "New average world temperature: " + String.format("%.2f",averageWorldTemperature) + "\u00B0" + "C\n";
         // Print updates to the user information box
-        Main.mainMenu.printToUserTextBox("New average world temperature: " + String.format("%.2f",averageWorldTemperature) + "\u00B0" + "C");
-        if(mainMenu.timelineSlider.getValue()!=2000.0) {
-            Main.mainMenu.printToUserTextBox("The world temperature increased by " + String.format("%.2f", tempChange) + "\u00B0" + "C since 2000");
-            mainMenu.dialogText += "The temperature increased by " + String.format("%.2f", tempChange) + "\u00B0" + "C since 2000\n";
+        Main.userInterface.printToUserTextBox("New average world temperature: " + String.format("%.2f",averageWorldTemperature) + "\u00B0" + "C");
+        if(userInterface.timelineSlider.getValue()!=2000.0) {
+            Main.userInterface.printToUserTextBox("The world temperature increased by " + String.format("%.2f", tempChange) + "\u00B0" + "C since 2000");
+            userInterface.dialogText += "The temperature increased by " + String.format("%.2f", tempChange) + "\u00B0" + "C since 2000\n";
         }
 
-        Main.mainMenu.printToUserTextBox("Water percentage: " +  String.format("%.2f",(waterPixels *100.0f)/(Constants.MAP_SIZE_Y * Constants.MAP_SIZE_X)) + "%");
-        Main.mainMenu.printToUserTextBox("Ice percentage: " +  String.format("%.2f",(icePixels *100.0f)/(Constants.MAP_SIZE_Y * Constants.MAP_SIZE_X)) + "%");
+        Main.userInterface.printToUserTextBox("Water percentage: " +  String.format("%.2f",(waterPixels *100.0f)/(Constants.MAP_SIZE_Y * Constants.MAP_SIZE_X)) + "%");
+        Main.userInterface.printToUserTextBox("Ice percentage: " +  String.format("%.2f",(icePixels *100.0f)/(Constants.MAP_SIZE_Y * Constants.MAP_SIZE_X)) + "%");
     }
 
     /**
@@ -479,14 +478,14 @@ public class World {
 
         // Print how many of each species died
         for(Map.Entry<String,Integer> entry : deaths.entrySet()) {
-            Main.mainMenu.printToUserTextBox(entry.getValue() + " of the " + entry.getKey() + "s died.");
-            mainMenu.dialogText += entry.getValue() + " of the " + entry.getKey() + "s died." + "\n";
+            Main.userInterface.printToUserTextBox(entry.getValue() + " of the " + entry.getKey() + "s died.");
+            userInterface.dialogText += entry.getValue() + " of the " + entry.getKey() + "s died." + "\n";
         }
 
         // Print how many of each species came back to life
         for(Map.Entry<String,Integer> entry : reverts.entrySet()) {
-            Main.mainMenu.printToUserTextBox(entry.getValue() + " of the " + entry.getKey() + "s are back.");
-            mainMenu.dialogText += entry.getValue() + " of the " + entry.getKey() + "s are back." + "\n";
+            Main.userInterface.printToUserTextBox(entry.getValue() + " of the " + entry.getKey() + "s are back.");
+            userInterface.dialogText += entry.getValue() + " of the " + entry.getKey() + "s are back." + "\n";
         }
 
         deaths.clear();
@@ -522,12 +521,12 @@ public class World {
         // Print the percentage of animals lost of each species
         for(Map.Entry<String,Integer> totalEntry : total.entrySet()) {
             if (dead.get(totalEntry.getKey()) == null) {
-                Main.mainMenu.printToUserTextBox("The " + totalEntry.getKey() + " population is still 100% alive");
-                mainMenu.dialogText += "The " + totalEntry.getKey() + " population is still 100% alive\n";
+                Main.userInterface.printToUserTextBox("The " + totalEntry.getKey() + " population is still 100% alive");
+                userInterface.dialogText += "The " + totalEntry.getKey() + " population is still 100% alive\n";
             } else {
                 float res = (dead.get(totalEntry.getKey()) * 100f)/totalEntry.getValue();
-                Main.mainMenu.printToUserTextBox("In total, we lost " +  String.format("%.2f",res) + "% of the " + totalEntry.getKey() + " population");
-                mainMenu.dialogText += "In total, we lost " +  String.format("%.2f",res) + "% of the " + totalEntry.getKey() + " population\n";
+                Main.userInterface.printToUserTextBox("In total, we lost " +  String.format("%.2f",res) + "% of the " + totalEntry.getKey() + " population");
+                userInterface.dialogText += "In total, we lost " +  String.format("%.2f",res) + "% of the " + totalEntry.getKey() + " population\n";
             }
         }
         total.clear();

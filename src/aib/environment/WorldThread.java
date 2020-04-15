@@ -1,8 +1,7 @@
 package aib.environment;
 
 import aib.Main;
-import aib.Menu;
-import com.sun.javafx.geom.Vec2f;
+import aib.UserInterface;
 import javafx.application.Platform;
 
 /**
@@ -22,8 +21,8 @@ public class WorldThread implements Runnable {
     /** The offset for the perlin noise */
     float offsetX;
     float offsetY;
-    /** The application menu */
-    Menu menu;
+    /** The application userInterface */
+    UserInterface userInterface;
 
     /**
      * Create a new world calculation thread
@@ -43,7 +42,7 @@ public class WorldThread implements Runnable {
         this.inputSeed = inputSeed;
         this.inputScale = inputScale;
         this.inputPersistence = inputPersistence;
-        this.menu = Main.mainMenu;
+        this.userInterface = Main.userInterface;
     }
 
     /**
@@ -52,10 +51,10 @@ public class WorldThread implements Runnable {
     @Override
     public void run() {
         // On the javafx application thread, start the loading animation
-        Platform.runLater( () -> menu.startLoading());
+        Platform.runLater( () -> userInterface.startLoading());
         // On this thread, create the new world map
         World.calculateMap(inputSeed, inputScale, inputOctaves, inputPersistence, inputLacunarity, offsetX,offsetY);
         // Back on the javafx application thread, stop the loading animation
-        Platform.runLater( () -> menu.stopLoading());
+        Platform.runLater( () -> userInterface.stopLoading());
     }
 }
