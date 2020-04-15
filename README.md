@@ -1,25 +1,24 @@
-# Final Year Project
 ## Educational Tool for Climate Change Visualisation - 2019/2020
 
 ***To run this application, you must have Java 8 installed.**
 
 ### Using the application
-To try and test the application, simply open a terminal in the `aib743` directory and run the command `java aib743.jar`, 
-or double click `aib743.jar` from the file explorer.
+To try and test the application, simply open a terminal in the `climate-change-visualisation` directory and run the command `java app.jar`, 
+or double click `app.jar` from the file explorer.
 
 ### Running the project in IntelliJ IDEA
 
 To access the code and run it yourself in IntelliJ IDEA, take the following steps:
-- Right click the `aib743` directory and click **Open Folder as IntelliJ IDEA Project**. Alternatively, 
-with IntelliJ IDEA open, click `File > New > Project From existing Sources` and select the `aib743` folder. 
+- Right click the `climate-change-visualisation` directory and click **Open Folder as IntelliJ IDEA Project**. Alternatively, 
+with IntelliJ IDEA open, click `File > New > Project From existing Sources` and select the `climate-change-visualisation` folder. 
 Leave all the other settings as they are to create the project.
 - After the project is created, go to `File > Project Structure > Project` and set the **Project SDK** to **1.8**
 - Set the **Project language level** to **8 - Lambdas, type annotations etc.**
-- Create a new directory `out` inside the root folder `aib743`. From `File > Project Structure > Project`, set this 
+- Create a new directory `out` inside the root folder `climate-change-visualisation`. From `File > Project Structure > Project`, set this 
  folder as the **Project compiler output** by typing or selecting its path.
 - From the project file list, right click the `src` folder and press `Mark Directory as > Source Root`. Mark `resources` 
 as the `Resource Root` directory and `test` as the `Test Root` directory the same way.
-- Finally, run the main method by opening the `aib743 > src > aib > Main` file and then clicking 
+- Finally, run the main method by opening the `climate-change-visualisation > src > aib > Main` file and then clicking 
 `Run > Run... > Main > Run` from the application bar.
 
 ## Libraries
