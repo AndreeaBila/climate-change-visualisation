@@ -3,12 +3,9 @@
 ***To run this application, you must have Java 8 installed.**
 
 ### Preview of changes to the environment
-<div>
-<img style="width:48%" src="resources/screenshots/animals-2000.png"/>
-<img style="width:48%" src="resources/screenshots/animals-2100.png"/>
-<span style="padding:10%">Initial environment state</span>
-<span style="padding:4%">After 100 years of climate change</span>
-</div>
+Initial environment state             |  After 100 years of climate change
+:-------------------------:|:-------------------------:
+![](resources/screenshots/animals-2000.png)  |  ![](resources/screenshots/animals-2100.png)
 
 ### Using the application
 To try and test the application, simply open a terminal in the `climate-change-visualisation` directory and run the command `java app.jar`, 
