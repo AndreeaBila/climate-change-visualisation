@@ -2,6 +2,14 @@
 
 ***To run this application, you must have Java 8 installed.**
 
+### Preview of changes to the environment
+<div>
+<img style="width:48%" src="resources/screenshots/animals-2000.png"/>
+<img style="width:48%" src="resources/screenshots/animals-2100.png"/>
+<span style="padding:10%">Initial environment state</span>
+<span style="padding:4%">After 100 years of climate change</span>
+</div>
+
 ### Using the application
 To try and test the application, simply open a terminal in the `climate-change-visualisation` directory and run the command `java app.jar`, 
 or double click `app.jar` from the file explorer.
@@ -21,7 +29,7 @@ as the `Resource Root` directory and `test` as the `Test Root` directory the sam
 - Finally, run the main method by opening the `climate-change-visualisation > src > aib > Main` file and then clicking 
 `Run > Run... > Main > Run` from the application bar.
 
-## Libraries
+### Libraries
 #### [FastNoise by Jordan Peck](https://github.com/Auburns/FastNoise_Java)
 Library used to generate noise values from my samples. I replaced javax.vecmath.Vector2f and javax.vecmath.Vector3f with 
 com.sun.javafx.geom.Vec2f and com.sun.javafx.geom.Vec3f because javax is no longer part of Java and I already use JavaFX.\
